@@ -3,16 +3,21 @@
     <div class="row">
       <div class="col text-left">
         <h2>Listado de libros</h2>
+        <!-- <b-button size="sm" :to="{name:'NewBook'}" variant="primary">
+          Nuevo Libro
+        </b-button> -->
 
         <div class="col-md-12">
           <b-table stripped hover :items="books" 
                     :fields="fields">
 
             <template slot:key="{action}">
-                <b-button variant="primary">
+                <b-button type="submit" variant="primary"
+                          :to="{ name:'EditBook', params: {bookId: data.item.id} }">
                   Editar
                 </b-button>
-                <b-button variant="danger">
+                <b-button type="submit" variant="danger"
+                          :to="{ name:'DeleteBook', params: {bookId: data.item.id} }">
                   Eliminar
                 </b-button>
             </template>
@@ -40,7 +45,7 @@ export default {
   },
   methods: {
     getBooks() {
-      const path = `http://localhost:8000/api/v1.0/books/`
+      const path = 'http://localhost:8000/api/v1.0/books/'
       axios.get(path).then((response) => {
         this.books = response.data
       }) 

@@ -9,13 +9,23 @@ export default new Router({
   routes: [
     {
       path: '/books/',
-      name: 'booklist',
+      name: 'BookList',
       component: () => import('./views/BookList.vue')
     },
     {
       path: '/books/:bookId/edit',
-      name: 'edit',
+      name: 'EditBook',
       component: () => import('./views/EditBook.vue')
+    },
+    {
+      path: '/books/:bookId/delete',
+      name: 'DeleteBook',
+      component: () => import('./views/DeleteBook.vue')
+    },
+    {
+      path: '/books/new',
+      name: 'NewBook',
+      component: () => import('./views/NewBook.vue')
     }
   ]
 })

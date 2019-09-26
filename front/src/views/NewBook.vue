@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col text-left">
-        <h2>Editar Libro</h2>
+        <h2>Nuevo Libro</h2>
       </div>
     </div>
   
@@ -38,10 +38,11 @@
               <div class="rows">
                 <div class="col text-left">
                   <b-button type="submit" variant="primary">
-                    Editar
+                    Crear
                   </b-button> 
                   <b-button type="submit" class="btn-large-space" 
-                            :to="{ name: 'BookList' }">Cancelar
+                            :to="{ name: 'BookList' }">
+                    Cancelar
                   </b-button> 
                 </div>
               </div>
@@ -60,7 +61,6 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      bookId: this.$route.params.bookId,
       form: {
         title: '',
         description: '',
@@ -70,13 +70,13 @@ export default {
   methods: {
     submit(event) {
       event.preventDefault()
-      const path = `https://localhost:8000/api/v1.0/books/${this.bookId}`
-      
-      axios.put(path, this.form).then((response) => {
+      const path = 'https://localhost:8000/api/v1.0/books/'
+
+      axios.post(path, this.form).then((response) => {
         this.form.title = response.data.title
         this.form.description = response.data.description
 
-        alert("Libro actualizado exitosamente")
+        alert("Libro creado exitosamente")
       })
       .catch((error) => {
         console.log(error)
@@ -84,7 +84,6 @@ export default {
     },
     getBook(){
       const path = `https://localhost:8000/api/v1.0/books/${this.bookId}`
-      
       axios.get(path).then((response) => {
         this.form.title = response.data.title
         this.form.description = response.data.description
